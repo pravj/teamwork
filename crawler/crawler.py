@@ -1,7 +1,13 @@
-import requests
+import sys
+
+try:
+    import requests
+except ImportError:
+    raise Exception('unable to load requests module')
 
 
 class Crawler:
+
     def __init__(self, org):
         self.org = org
 
@@ -9,7 +15,8 @@ class Crawler:
         url = "https://api.github.com/users/%s" % (self.org)
         res = requests.get(url)
 
-        if (res.json()['type'] == u'Organization'):
-	    return True
-	else:
-	    return False
+        if (res.status_code == 200):
+            return (res.json()['type'] == u'Organization')
+        else:
+            print res.json()['message']
+            sys.exit(0)
