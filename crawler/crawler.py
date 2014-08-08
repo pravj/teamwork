@@ -12,6 +12,7 @@ class Crawler:
 
     def __init__(self, org):
         self.org = org
+        self.members = []
 
     # checks GitHub user type for 'Organization' or 'User' type
     #
@@ -27,22 +28,32 @@ class Crawler:
             sys.exit(0)
 
     # collects public members for a GitHub organization
-    def members(self):
-        members_url = "https://api.github.com/orgs/%s/public_members"\
-            % (self.org)
+    def collect_members(self, attempt=1):
+        members_url = "https://api.github.com/orgs/%s/public_members?page=%d"\
+            % (self.org, attempt)
         res = requests.get(members_url)
 
-        if (res.status_code == requests.codes.ok):
-            self.add_members(res.json())
+        if (len(res.json()) == 0):
+            if (attempt == 1):
+                print "no public members for organization '%s'" % (self.org)
+                sys.exit(0)
+            else:
+                return self.members
+        elif (res.status_code == requests.codes.ok):
+            self.members = self.members + res.json()
+            print self.members
+            self.collect_members(attempt=attempt + 1)
         else:
             print res.json()['message']
             sys.exit(0)
 
     # saves members in 'members.json' inside 'data' directory
-    def add_members(self, response):
+    def add_members(self):
+        self.collect_members()
         members = []
-        for member in response:
+        for member in self.members:
             members.append(member['login'])
+        self.members = members
 
         path = os.path.join(os.path.dirname(__file__), '../data/members.json')
         members_file = os.path.abspath(path)
