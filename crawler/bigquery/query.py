@@ -4,7 +4,7 @@ import json
 from bigquery.client import get_client
 
 CONFIG_PATH = os.path.join(
-    os.path.dirname(__file__), '../config/bigquery.json')
+    os.path.dirname(__file__), '../../config/bigquery.json')
 CONFIG_FILE = os.path.abspath(CONFIG_PATH)
 
 
