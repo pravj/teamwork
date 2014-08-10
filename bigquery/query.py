@@ -1,36 +1,46 @@
 import os
 import json
+
 from bigquery.client import get_client
 
-config_file_path = os.path.join(os.path.dirname(__file__), '../config/bigquery.json')
-config_file = os.path.abspath(config_file_path)
+CONFIG_PATH = os.path.join(
+    os.path.dirname(__file__), '../config/bigquery.json')
+CONFIG_FILE = os.path.abspath(CONFIG_PATH)
 
-with open(config_file, 'r') as f:
-    data = f.read()
-    f.close()
 
-config = json.loads(data)
+class Query:
 
-# BigQuery project id as listed in the Google Developers Console.
-project_id = config['project_id']
+    def __init__(self):
+        self.config = None
 
-# Service account email address as listed in the Google Developers Console.
-client_email = config['client_email']
+        self.project_id = None
+        self.client_email = None
+        self.private_key = None
 
-# PKCS12 or PEM key provided by Google.
-key = config['private_key']
+        self.client = None
 
-client = get_client(project_id, service_account=client_email, private_key=key, readonly=True)
+        self.load_config()
+        self.create_client()
 
-query = "SELECT payload_head, repository_name, repository_language, repository_size, repository_pushed_at FROM [githubarchive:github.timeline] WHERE type='PushEvent' AND repository_organization='github' AND actor_attributes_login='holman' AND PARSE_UTC_USEC(created_at) >= PARSE_UTC_USEC('2014-01-01 00:00:00');"
+    def load_config(self):
+        with open(CONFIG_FILE, 'r') as f:
+            self.config = json.loads(f.read())
+            print self.config
+            f.close()
 
-# Submit a query.
-job_id, results = client.query(query)
+        self.project_id = self.config['project_id']
+        self.client_email = self.config['client_email']
+        self.private_key = self.config['private_key']
 
-# Check if the query has finished running.
-complete, row_count = client.check_job(job_id)
+    def create_client(self):
+        self.client = get_client(self.project_id,
+                                 service_account=self.client_email,
+                                 private_key=self.private_key, readonly=True)
 
-# Retrieve the results.
-if complete:
-    results = client.get_query_rows(job_id)
-    print results
+    def execute(self, query):
+        job_id, results = self.client.query(query)
+        complete, rows = self.client.check_job(job_id)
+
+        if complete:
+            results = self.client.get_query_rows(job_id)
+            return results
