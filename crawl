@@ -1,0 +1,31 @@
+#!/usr/bin/env python
+
+import os
+import json
+
+from crawler.query.query import Query
+from crawler.query.builder import Builder
+from crawler.crawler import Crawler
+
+CONFIG_PATH = os.path.join(os.path.dirname(__file__), './config/teamwork.json')
+CONFIG_FILE = os.path.abspath(CONFIG_PATH)
+
+with open(CONFIG_FILE, 'r') as f:
+    config = json.loads(f.read())
+    f.close()
+
+crawler = Crawler(config['organization'])
+crawler.add_members()
+
+query = Query()
+builder = Builder(config['organization'])
+
+MEMBERS_PATH = os.path.join(os.path.dirname(__file__), './data/members.json')
+MEMBERS_FILE = os.path.abspath(MEMBERS_PATH)
+
+with open(MEMBERS_FILE, 'r') as f:
+    members = json.loads(f.read())
+    f.close()
+
+for member in members:
+    print query.execute(builder.build(member))

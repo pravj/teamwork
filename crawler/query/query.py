@@ -25,7 +25,6 @@ class Query:
     def load_config(self):
         with open(CONFIG_FILE, 'r') as f:
             self.config = json.loads(f.read())
-            print self.config
             f.close()
 
         self.project_id = self.config['project_id']

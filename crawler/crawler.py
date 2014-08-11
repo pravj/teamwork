@@ -41,7 +41,6 @@ class Crawler:
                 return self.members
         elif (res.status_code == requests.codes.ok):
             self.members = self.members + res.json()
-            print self.members
             self.collect_members(attempt=attempt + 1)
         else:
             print res.json()['message']
