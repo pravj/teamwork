@@ -1,9 +1,15 @@
+from datetime import date
+TODAY = date.today()
+
+
 class Builder:
 
     def __init__(self):
         pass
 
-    def build(self, org, member, start, end = None):
+    def build(self, org, member, end=None):
+        start = "%s-%s-%s 00:00:00" % (TODAY.year, TODAY.month, TODAY.day)
+
         query = """SELECT payload_head, repository_name, repository_language,
         repository_size, repository_pushed_at FROM
         [githubarchive:github.timeline] WHERE type='PushEvent' AND
@@ -17,4 +23,4 @@ class Builder:
         else:
             query += ";"
 
-        print query
+        return query
