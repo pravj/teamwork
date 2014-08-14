@@ -1,5 +1,5 @@
-from datetime import date
-TODAY = date.today()
+from datetime import date, timedelta
+PAST = (date.today() - timedelta(days=365))
 
 
 class Builder:
@@ -8,7 +8,7 @@ class Builder:
         self.org = org
 
     def start(self):
-	return "%s-%s-%s 00:00:00" % (TODAY.year, TODAY.month, TODAY.day)
+        return "%s-%s-%s 00:00:00" % (PAST.year, PAST.month, PAST.day)
 
     def build(self, member, end=None):
         query = """SELECT payload_head, repository_name, repository_language,
