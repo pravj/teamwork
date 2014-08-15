@@ -1,2 +1,3 @@
 requests>=2.0.0
 bigquery-python>=0.0.6
+rethinkdb>=1.13

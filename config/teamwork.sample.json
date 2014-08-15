@@ -1,3 +1,8 @@
 {
-  "organization": ""
+  "organization": "",
+
+  "host": "localhost",
+  "port": 28015,
+  "db": "teamwork",
+  "auth_key": ""
 }

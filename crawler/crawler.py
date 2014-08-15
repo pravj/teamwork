@@ -54,7 +54,7 @@ class Crawler:
             members.append(member['login'])
         self.members = members
 
-        path = os.path.join(os.path.dirname(__file__), '../data/members.json')
+        path = os.path.join(os.path.dirname(__file__), '../raw/members.json')
         members_file = os.path.abspath(path)
 
         with open(members_file, 'w') as f:
