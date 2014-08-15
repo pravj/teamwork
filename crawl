@@ -6,6 +6,7 @@ import json
 from crawler.query.query import Query
 from crawler.query.builder import Builder
 from crawler.crawler import Crawler
+from db.driver import Driver
 
 CONFIG_PATH = os.path.join(os.path.dirname(__file__), './config/teamwork.json')
 CONFIG_FILE = os.path.abspath(CONFIG_PATH)
@@ -20,6 +21,9 @@ crawler.add_members()
 query = Query()
 builder = Builder(config['organization'].lower())
 
+driver = Driver()
+driver.connect()
+
 MEMBERS_PATH = os.path.join(os.path.dirname(__file__), './raw/members.json')
 MEMBERS_FILE = os.path.abspath(MEMBERS_PATH)
 
@@ -28,4 +32,5 @@ with open(MEMBERS_FILE, 'r') as f:
     f.close()
 
 for member in members:
-    return query.execute(builder.build(member))
+    result = query.execute(builder.build(member))
+    driver.insert(member, result)

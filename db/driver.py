@@ -40,15 +40,15 @@ class Driver:
     def create_db(self):
         db_list = r.db_list().run()
 
-        if (self.db in db_list):
+        if self.db in db_list:
             pass
         else:
             r.db_create(self.db).run()
 
     def table_exist(self, table):
-        table_list = r.table_list().run()
+        table_list = r.db(self.db).table_list().run()
 
-        if (table in table_list()):
+        if table in table_list:
             return True
         else:
             return False
