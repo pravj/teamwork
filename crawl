@@ -2,26 +2,21 @@
 
 import os
 import json
-
+from config.configer import Configer
 from crawler.query.query import Query
 from crawler.query.builder import Builder
 from crawler.crawler import Crawler
 from db.driver import Driver
 
-CONFIG_PATH = os.path.join(os.path.dirname(__file__), './config/teamwork.json')
-CONFIG_FILE = os.path.abspath(CONFIG_PATH)
-
-with open(CONFIG_FILE, 'r') as f:
-    config = json.loads(f.read())
-    f.close()
+config = Configer().config('teamwork')
 
 crawler = Crawler(config['organization'].lower())
 crawler.add_members()
 
-query = Query()
+query = Query(Configer().config('bigquery'))
 builder = Builder(config['organization'].lower())
 
-driver = Driver()
+driver = Driver(config)
 driver.connect()
 
 MEMBERS_PATH = os.path.join(os.path.dirname(__file__), './raw/members.json')

@@ -2,34 +2,18 @@ import os
 import ast
 import rethinkdb as r
 
-CONFIG_PATH = os.path.join(
-    os.path.dirname(__file__), '../config/teamwork.json')
-CONFIG_FILE = os.path.abspath(CONFIG_PATH)
-
 
 class Driver:
 
-    def __init__(self):
-        self.host = None
-        self.port = None
-        self.db = None
-        self.auth_key = None
-
-        self.con = None
-        self.ref = None
-        self.raw_ref = None
-
-        self.load()
-
-    def load(self):
-        with open(CONFIG_FILE, 'r') as f:
-            config = ast.literal_eval(f.read())
-            f.close()
-
+    def __init__(self, config):
         self.host = config['host']
         self.port = config['port']
         self.db = config['db']
         self.auth_key = config['auth_key']
+
+        self.con = None
+        self.ref = None
+        self.raw_ref = None
 
     def connect(self):
         self.con = r.connect(host=self.host,

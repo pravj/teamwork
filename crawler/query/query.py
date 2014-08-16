@@ -1,35 +1,18 @@
 import os
 import json
-
 from bigquery.client import get_client
-
-CONFIG_PATH = os.path.join(
-    os.path.dirname(__file__), '../../config/bigquery.json')
-CONFIG_FILE = os.path.abspath(CONFIG_PATH)
 
 
 class Query:
 
-    def __init__(self):
-        self.config = None
-
-        self.project_id = None
-        self.client_email = None
-        self.private_key = None
+    def __init__(self, config):
+        self.project_id = config['project_id']
+        self.client_email = config['client_email']
+        self.private_key = config['private_key']
 
         self.client = None
 
-        self.load_config()
         self.create_client()
-
-    def load_config(self):
-        with open(CONFIG_FILE, 'r') as f:
-            self.config = json.loads(f.read())
-            f.close()
-
-        self.project_id = self.config['project_id']
-        self.client_email = self.config['client_email']
-        self.private_key = self.config['private_key']
 
     def create_client(self):
         self.client = get_client(self.project_id,
