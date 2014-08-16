@@ -1,0 +1,9 @@
+*.pyc
+
+crawler/test.py
+
+config/bigquery.json
+
+venv/
+
+config/teamwork.json
