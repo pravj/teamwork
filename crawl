@@ -34,5 +34,11 @@ with open(MEMBERS_FILE, 'r') as f:
 for member in members:
     result = query.execute(builder.build(member))
 
-    if (result != [] or result is None):
+    if result == []:
+        pass
+    elif result is None:
+        pass
+    else:
         driver.insert('raw', result)
+
+driver.filter_rows(members)

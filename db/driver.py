@@ -16,6 +16,8 @@ class Driver:
         self.auth_key = None
 
         self.con = None
+        self.ref = None
+        self.raw_ref = None
 
         self.load()
 
@@ -37,6 +39,12 @@ class Driver:
 
         self.create_db()
 
+        self.ref = r.db(self.db)
+        self.raw_ref = self.ref.table('raw')
+
+    def disconnect(self):
+        self.con.close()
+
     def create_db(self):
         db_list = r.db_list().run()
 
@@ -46,7 +54,7 @@ class Driver:
             r.db_create(self.db).run()
 
     def table_exist(self, table):
-        table_list = r.db(self.db).table_list().run()
+        table_list = self.ref.table_list().run()
 
         if table in table_list:
             return True
@@ -62,4 +70,12 @@ class Driver:
         else:
             self.create_table(table)
 
-        r.table(table).insert(data).run()
+        self.ref.table(table).insert(data).run()
+
+    def filter_rows(self, members):
+        self.raw_ref.merge({'is_member': 'false'}).run()
+
+        for member in members:
+            self.raw_ref.filter({'is_member': member}).update({'is_member': 'true'}).run()
+
+        self.raw_ref.filter({'is_member': 'true'}).delete().run()
