@@ -13,7 +13,15 @@ def home():
 @app.route('/calender', methods=['GET','POST'])
 def calenderData():
 	org = request.form['org']
-	procer = Procer();
-	procer.connect(org);
-	# jsonify(procer.getCalenderData())
+	if(org is None or org == ''):
+		return render_template("sam.html")
 	return render_template("calender.html", org=org)
+
+@app.route('/calender/details', methods=['POST'])
+def return_details():
+	org = request.form['org']
+	if(org is None or org == ''):
+		return render_template("sam.html")
+	procer = Procer()
+	procer.connect()
+	return jsonify(procer.getCalenderData(org))

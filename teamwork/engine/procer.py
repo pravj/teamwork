@@ -28,15 +28,15 @@ class Procer:
 		self.db = config['db']
 		self.auth_key = config['auth_key']
 
-	def connect(self, org):
+	def connect(self):
 		self.con = r.connect(host=self.host,
 							 port=self.port,
 							 db=self.db,
 							 auth_key=self.auth_key).repl()
 		print "Connected !! to %s" % self.db
 
-	def getCalenderData(self):
-		data = r.db(self.db).table("raw").pluck("repository_pushed_at","user").run()
+	def getCalenderData(self, org):
+		data = r.db(org).table("raw").pluck("repository_pushed_at","user").run()
 		l = jsontree.jsontree()
 		i=0
 		for d in data:
