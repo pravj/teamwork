@@ -8,12 +8,14 @@ from crawler.query.builder import Builder
 from crawler.crawler import Crawler
 from db.driver import Driver
 
-config = Configer().config('teamwork')
+configer = Configer()
+config = configer.config('teamwork')
+query_config = Configer().config('bigquery')
 
 crawler = Crawler(config['organization'].lower())
 crawler.add_members()
 
-query = Query(Configer().config('bigquery'))
+query = Query(query_config)
 builder = Builder(config['organization'].lower())
 
 driver = Driver(config)
