@@ -57,9 +57,7 @@ class Driver:
         self.ref.table(table).insert(data).run()
 
     def filter_rows(self, members):
-        self.raw_ref.merge({'is_member': 'false'}).run()
-
         for member in members:
-            self.raw_ref.filter({'is_member': member}).update({'is_member': 'true'}).run()
+            self.raw_ref.filter({'user': member}).update({'is_member': 'true'}).run()
 
-        self.raw_ref.filter({'is_member': 'true'}).delete().run()
+        self.raw_ref.filter({'is_member': 'false'}).delete().run()

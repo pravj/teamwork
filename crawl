@@ -27,16 +27,16 @@ def main():
     driver = Driver(config)
     driver.connect()
 
-    with open(MEMBERS_FILE, 'r') as f:
-        members = json.loads(f.read())
-        f.close()
-
     result = query.execute(builder.build())
 
     if (result == [] or result is None):
         pass
     else:
         driver.insert('raw', result)
+
+    with open(MEMBERS_FILE, 'r') as f:
+        members = json.loads(f.read())
+        f.close()
 
     driver.filter_rows(members)
 
