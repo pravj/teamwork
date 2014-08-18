@@ -13,11 +13,14 @@
 }
 
 .calender-graph{
-	padding: 10px 10px 10px 10px;
-    height: 126px;
+	padding-left: 10px;
+    height: 164px;
     text-align: center;
-  	width: 810px;
+  	width: 820px;
   	margin: auto;
+  	border-style: solid;
+    border-color: #eee;
+    border-width: 1px;
 }
 
 .calender-graph .months{
@@ -30,6 +33,55 @@
 	font-size: 12px;
 	color :#aaa;
 }
+
+.contrib-details{
+	text-align: center;
+	margin-top: 10px;
+	margin-right: auto;
+	margin-left: auto;
+	height: 100px;
+	width: 830px;
+}
+
+.contrib-day {
+	width: 273px;
+	height: 100px;
+	border-style: solid;
+    border-color: #eee;
+    border-width: 1px;
+}
+
+.longest-streak{
+	width: 273px;
+	height: 100px;
+	border-style: solid;
+    border-color: #eee;
+    border-width: 1px;
+}
+
+.current-streak{
+	width: 274px;
+	height: 100px;
+	border-style: solid;
+    border-color: #eee;
+    border-width: 1px;
+}
+
+.lbl{
+	color: #777;
+	font-size: 13px;
+}
+
+.lbl0{
+	margin-top: 20px;
+}
+
+.lbl1{
+	font-size: 13px;
+	margin-top: 10px;
+	color: #777;
+}
+
 html {
 	font-family: sans-serif;
 	-ms-text-size-adjust: 100%;
