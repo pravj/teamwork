@@ -27,9 +27,30 @@ def contributions(time_series, start):
         index = time_data.index(time_str)
         commit_data[index] += 1
 
-    contributions = []
+    streak(commit_data, time_data)
 
+    contributions = []
     for i in range(366):
         contributions.append([time_data[i], commit_data[i]])
 
     return contributions
+
+
+def streak(commit_data, time_data):
+    current, longest, temp_longest, index = 0, 0, 0, 0
+
+    for k in range(366):
+        if (commit_data[k] != 0):
+            current += 1
+            temp_longest += 1
+            
+        elif (commit_data[k] == 0 or k == 365):
+            current = 0
+
+            if (temp_longest > longest):
+                longest = temp_longest
+                index = k
+
+            temp_longest = 0
+
+    return (current, longest+1, time_data[index+1], time_data[index-longest+1])
