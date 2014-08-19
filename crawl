@@ -38,6 +38,7 @@ def main():
         f.close()
 
     driver.filter_rows(members)
+    driver.disconnect()
 
 if __name__ == '__main__':
     main()

@@ -8,7 +8,7 @@ class Driver:
     def __init__(self, config):
         self.host = config['host']
         self.port = config['port']
-        self.db = config['db']
+        self.db = 'teamwork_%s' % (config['db'])
         self.auth_key = config['auth_key']
 
         self.con = None

@@ -2,16 +2,28 @@
 
 import os
 import json
+from datetime import date, timedelta
 
-from config.configer import Configer
+from config import configer
 from db.driver import Driver
+from scanner import contributions
 
 MEMBERS_PATH = os.path.join(os.path.dirname(__file__), './raw/members.json')
 MEMBERS_FILE = os.path.abspath(MEMBERS_PATH)
 
 
 def main():
-    print 'scan process'
+    config = configer.config('teamwork')
+
+    driver = Driver(config)
+    driver.connect()
+
+    field = 'repository_pushed_at'
+    time_series = driver.raw_ref.with_fields(field).order_by(field).run()
+
+    contributions.contributions(time_series, date.today()-timedelta(days=365))
+
+    driver.disconnect()
 
 if __name__ == '__main__':
     main()
