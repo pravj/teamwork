@@ -1,0 +1,17 @@
+#!/usr/bin/env python
+
+import os
+import json
+
+from config.configer import Configer
+from db.driver import Driver
+
+MEMBERS_PATH = os.path.join(os.path.dirname(__file__), './raw/members.json')
+MEMBERS_FILE = os.path.abspath(MEMBERS_PATH)
+
+
+def main():
+    print 'scan process'
+
+if __name__ == '__main__':
+    main()

@@ -3,7 +3,7 @@
 import os
 import json
 
-from config.configer import Configer
+from config import configer
 from crawler.query.query import Query
 from crawler.query.builder import Builder
 from crawler.crawler import Crawler
@@ -14,9 +14,8 @@ MEMBERS_FILE = os.path.abspath(MEMBERS_PATH)
 
 
 def main():
-    configer = Configer()
     config = configer.config('teamwork')
-    query_config = Configer().config('bigquery')
+    query_config = configer.config('bigquery')
 
     crawler = Crawler(config['organization'].lower())
     crawler.add_members()
@@ -40,5 +39,5 @@ def main():
 
     driver.filter_rows(members)
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
