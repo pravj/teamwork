@@ -3,7 +3,7 @@
 	width: 13px;
 	height: 13px;
 }
-
+	
 #square:hover{
 	border-style: solid;
     border-color: black;
@@ -86,4 +86,12 @@ html {
 	font-family: sans-serif;
 	-ms-text-size-adjust: 100%;
 	-webkit-text-size-adjust: 100%
+}
+
+.months{
+	margin-top: 10px;
+}
+
+.contrib{
+	margin-top: 10px;
 }
