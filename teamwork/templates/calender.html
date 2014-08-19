@@ -5,15 +5,21 @@
 	<title>{{org}}</title>
 	{% endif %}
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/hint.css')}}">
 	<script src="{{ url_for('static', filename='js/jquery-2.1.1.js')}}"></script>
 	<script src="{{ url_for('static', filename='js/calender.js')}}"></script>
 </head>
 <body onload="addFields()">
 	<div class="calender-body">
 		<div class="calender-graph">
-			<div class="months"></div>
-			<!-- Months -->
-			<!-- Calendar -->
+			<div class="months">
+				<!-- Months -->
+			</div>
+			
+			<div class="contrib">
+				<!-- Calendar -->
+			</div>
+			
 		</div>
 
 		<div class="contrib-details">

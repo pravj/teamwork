@@ -13,11 +13,11 @@ function addFields(){
 	long_to = temp_date+" "+months[temp_month - 1]+" "+temp_year;
 
 	$.post(url, data, function(res){
-		var color_to_assign = new Array(365), sizeof_res = Object.keys(res).length;
-		for(var _t=0;_t<365;_t++) color_to_assign[_t] = 0;
+		var color_to_assign = new Array(367), sizeof_res = Object.keys(res).length;
+		for(var _t=0;_t<367;_t++) color_to_assign[_t] = 0;
 		for(var temp=0; temp<sizeof_res; temp++){
 			var date_from_now = parseInt((today - Date.parse(res[temp].repository_pushed_at))/86400000);
-			if(date_from_now < 365){
+			if(date_from_now < 367){
 				color_to_assign[date_from_now]++;
 				total_commit++;
 			}
@@ -34,13 +34,13 @@ function addFields(){
 				monthField.innerHTML = months[i-12];
 			else
 				monthField.innerHTML = months[i];
-			$(".calender-graph").append(monthField);
+			$(".months").append(monthField);
 		}
 
 		var field = document.createElement("div");
 		field.setAttribute("id", "vert");
-		field.setAttribute("style", "transform : translate(0px, -160px); width:13px");
-		$(".calender-graph").append(field);
+		field.setAttribute("style", "transform : translate(0px, 0px); width:13px");
+		$(".contrib").append(field);
 
 		/*First two days*/
 		for(var i=0;i<7;i++){
@@ -50,13 +50,11 @@ function addFields(){
 				subField.setAttribute("style", "visibility:hidden;");
 			}
 			else{
-				subField.setAttribute("date", temp_date+" "+months[temp_month - 1]+" "+temp_year);
-				temp_date++;
 				if(temp_date > days[temp_month - 1]){
 					temp_date = 1;
 					temp_month++;
 				}
-				var col, commits_of_day = color_to_assign[366+5-i];
+				var col, commits_of_day = color_to_assign[370-i];
 				if(commits_of_day != 0){
 					temp_long_streak += 1;
 				}
@@ -78,7 +76,10 @@ function addFields(){
 					col = colors[2];
 				else
 					col = colors[3];
+				subField.setAttribute("class", "hint--left");
+				subField.setAttribute("data-hint", commits_of_day+" Contributions on "+temp_date+" "+months[temp_month - 1]+" "+temp_year);
 				subField.setAttribute("style", "background:"+col);
+				temp_date++;
 			}
 			document.getElementById("vert").appendChild(subField);
 		}
@@ -87,9 +88,9 @@ function addFields(){
 		for(var i=0; i<52;i++){
 			var field = document.createElement("div");
 			field.setAttribute("id", "vert"+i);
-			var y_ = (-105)*(i+1)-160;
+			var y_ = (-105)*(i+1);
 			field.setAttribute("style", "transform : translate("+15*(i+1)+"px, "+y_+"px); width: 13px; ");
-			$(".calender-graph").append(field);
+			$(".contrib").append(field);
 			for(var j=0; j<7;j++){
 				var subField = document.createElement("div");
 				subField.setAttribute("id", "square");
@@ -103,18 +104,8 @@ function addFields(){
 							temp_year++;
 						}
 					}
-					subField.setAttribute("date", temp_date+" "+months[temp_month - 1]+" "+temp_year);
-					commits_of_day = color_to_assign[364 - _d_];
-					console.log(365 - _d_);
-					// if(commits_of_day == 0){
-					// 	col = colors[0];
-					// 	if(longest_streak < temp_long_streak){
-					// 		longest_streak = temp_long_streak;
-					// 		long_from = temp_long_from;
-					// 		long_to = temp_date+" "+months[temp_month - 1]+" "+temp_year;
-					// 	}
-					// 	temp_long_streak = 0;
-					// }
+					// subField.setAttribute("date", temp_date+" "+months[temp_month - 1]+" "+temp_year);
+					commits_of_day = color_to_assign[363 - _d_ ];
 					if(commits_of_day != 0){
 						temp_long_streak += 1;
 					}
@@ -134,6 +125,8 @@ function addFields(){
 					else if(commits_of_day <= 15) col = colors[2];
 					else col = colors[3];
 					// subField.setAttribute("count", commits_of_day);
+					subField.setAttribute("class", "hint--left");
+					subField.setAttribute("data-hint", commits_of_day+" Contributions on "+temp_date+" "+months[temp_month - 1]+" "+temp_year);
 					subField.setAttribute("style", "background:"+col);
 					temp_date++;
 				}
@@ -190,3 +183,7 @@ function hover(){
 	console.log(this.style);
 }
 */
+
+function lol(){
+	return "HI";
+}
