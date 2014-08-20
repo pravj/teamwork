@@ -17,8 +17,8 @@ def main():
     config = configer.config('teamwork')
     query_config = configer.config('bigquery')
 
-    crawler = Crawler(config['organization'].lower())
-    crawler.add_members()
+    #crawler = Crawler(config['organization'].lower())
+    #crawler.add_members()
 
     query = Query(query_config)
     builder = Builder(config['organization'].lower())

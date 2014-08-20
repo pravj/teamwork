@@ -21,7 +21,8 @@ def main():
     field = 'repository_pushed_at'
     time_series = driver.raw_ref.with_fields(field).order_by(field).run()
 
-    contributions.contributions(time_series, date.today()-timedelta(days=365))
+    start = date.today() - timedelta(days=365)
+    print contributions.contributions(time_series, start)
 
     driver.disconnect()
 

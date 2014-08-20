@@ -27,13 +27,13 @@ def contributions(time_series, start):
         index = time_data.index(time_str)
         commit_data[index] += 1
 
-    streak(commit_data, time_data)
-
     contributions = []
     for i in range(366):
         contributions.append([time_data[i], commit_data[i]])
 
-    return contributions
+    total = len(time_series)
+
+    return collect_data(total, contributions, streak(commit_data, time_data))
 
 
 def streak(commit_data, time_data):
@@ -53,4 +53,33 @@ def streak(commit_data, time_data):
 
             temp_longest = 0
 
-    return (current, longest+1, time_data[index+1], time_data[index-longest+1])
+    ranges = streak_range(current, longest, time_data, index)
+
+    return (current, longest, ranges)
+    #return (current, longest, time_data[index+1], time_data[index-longest])
+
+
+def streak_range(current, longest, time_data, index):
+    current_range = longest_range = 'Rock - Hard Place'
+    total_range = "%s - %s" % (time_data[0], time_data[365])
+
+    if (current > 0):
+        current_range = "%s - %s" % (time_data[366-current], time_data[365])
+    if (longest > 0):
+        longest_range = "%s - %s" % (time_data[index-longest], time_data[index+1])
+
+    return (current_range, longest_range, total_range)
+
+
+def collect_data(total, contributions, streak):
+    result = {}
+
+    result['total'] = total
+    result['contributions'] = contributions
+    result['current_streak'] = streak[0]
+    result['longest_streak'] = streak[1]
+    result['current_streak_range'] = streak[2][0]
+    result['longest_streak_range'] = streak[2][1]
+    result['total_streak_range'] = streak[2][2]
+
+    return result
