@@ -18,7 +18,7 @@ def commits_data(start):
     return (time_data, commit_data)
 
 
-def contributions(time_series, start):
+def contributions(time_series, start, reference = 'organization'):
     (time_data, commit_data) = commits_data(start)
 
     for i in range(len(time_series)):
@@ -33,7 +33,7 @@ def contributions(time_series, start):
 
     total = len(time_series)
 
-    return collect_data(total, contributions, streak(commit_data, time_data))
+    return collect_data(total, contributions, streak(commit_data, time_data), reference)
 
 
 def streak(commit_data, time_data):
@@ -71,9 +71,10 @@ def streak_range(current, longest, time_data, index):
     return (current_range, longest_range, total_range)
 
 
-def collect_data(total, contributions, streak):
+def collect_data(total, contributions, streak, refrence):
     result = {}
 
+    result['refrence'] = refrence
     result['total'] = total
     result['contributions'] = contributions
     result['current_streak'] = streak[0]

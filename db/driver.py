@@ -9,17 +9,13 @@ class Driver:
         self.host = config['host']
         self.port = config['port']
         self.db = 'teamwork_%s' % (config['db'])
-        self.auth_key = config['auth_key']
 
         self.con = None
         self.ref = None
         self.raw_ref = None
 
     def connect(self):
-        self.con = r.connect(host=self.host,
-                             port=self.port,
-                             db=self.db,
-                             auth_key=self.auth_key).repl()
+        self.con = r.connect(host=self.host, port=self.port).repl()
 
         self.create_db()
 
@@ -46,7 +42,7 @@ class Driver:
             return False
 
     def create_table(self, table):
-        r.table_create(table).run()
+        r.db(self.db).table_create(table).run()
 
     def insert(self, table, data):
         if (self.table_exist(table)):

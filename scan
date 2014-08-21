@@ -22,7 +22,10 @@ def main():
     time_series = driver.raw_ref.with_fields(field).order_by(field).run()
 
     start = date.today() - timedelta(days=365)
-    print contributions.contributions(time_series, start)
+    org_data = contributions.contributions(time_series, start, 'organization')
+
+    driver.create_table('contributions')
+    driver.insert('contributions', org_data) 
 
     driver.disconnect()
 
