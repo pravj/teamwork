@@ -12,14 +12,18 @@ from db.driver import Driver
 MEMBERS_PATH = os.path.join(os.path.dirname(__file__), './raw/members.json')
 MEMBERS_FILE = os.path.abspath(MEMBERS_PATH)
 
+REPOS_PATH = os.path.join(os.path.dirname(__file__), './raw/repo.json')
+REPOS_FILE = os.path.abspath(REPOS_PATH)
+
 
 def main():
     config = configer.config('teamwork')
     query_config = configer.config('bigquery')
 
-    #crawler = Crawler(config['organization'].lower())
-    #crawler.add_members()
-
+    crawler = Crawler(config['organization'].lower())
+    crawler.add_members()
+    crawler.add_repo_detail_in_file()
+    
     query = Query(query_config)
     builder = Builder(config['organization'].lower())
 
@@ -40,5 +44,6 @@ def main():
     driver.filter_rows(members)
     driver.disconnect()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()
