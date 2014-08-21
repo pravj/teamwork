@@ -12,8 +12,8 @@ from db.driver import Driver
 MEMBERS_PATH = os.path.join(os.path.dirname(__file__), './raw/members.json')
 MEMBERS_FILE = os.path.abspath(MEMBERS_PATH)
 
-REPOS_PATH = os.path.join(os.path.dirname(__file__), './raw/repo.json')
-REPOS_FILE = os.path.abspath(REPOS_PATH)
+INFO_PATH = os.path.join(os.path.dirname(__file__), './raw/info.json')
+INFO_FILE = os.path.abspath(INFO_PATH)
 
 
 def main():
@@ -22,8 +22,8 @@ def main():
 
     crawler = Crawler(config['organization'].lower())
     crawler.add_members()
-    crawler.add_repo_detail_in_file()
-    
+    crawler.add_info()
+
     query = Query(query_config)
     builder = Builder(config['organization'].lower())
 
