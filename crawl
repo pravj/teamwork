@@ -12,8 +12,9 @@ from db.driver import Driver
 MEMBERS_PATH = os.path.join(os.path.dirname(__file__), './raw/members.json')
 MEMBERS_FILE = os.path.abspath(MEMBERS_PATH)
 
-REPOS_PATH = os.path.join(os.path.dirname(__file__), './raw/repo.json')
-REPOS_FILE = os.path.abspath(REPOS_PATH)
+INFO_PATH = os.path.join(os.path.dirname(__file__), './raw/info.json')
+INFO_FILE = os.path.abspath(INFO_PATH)
+
 
 def main():
     configer = Configer()
@@ -22,8 +23,8 @@ def main():
 
     crawler = Crawler(config['organization'].lower())
     crawler.add_members()
-    crawler.add_repo_detail_in_file()
-    
+    crawler.add_info()
+
     query = Query(query_config)
     builder = Builder(config['organization'].lower())
 
@@ -31,7 +32,6 @@ def main():
     driver.connect()
 
     result = query.execute(builder.build())
-    # result = []
 
     if (result == [] or result is None):
         pass
@@ -43,16 +43,6 @@ def main():
         f.close()
 
     driver.filter_rows(members)
-
-    with open(REPOS_FILE, 'r') as f:
-        repos = json.loads(f.read())
-        f.close()
-
-    if (repos == [] or repos is None):
-        print "Repos insertion failed as there are None."
-        pass
-    else:
-        driver.insert('repos', repos)
 
 
 if __name__ == "__main__":

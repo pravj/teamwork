@@ -46,7 +46,7 @@ class Crawler:
             print res.json()['message']
             sys.exit(0)
 
-    # saves members in 'members.json' inside 'data' directory
+    # saves members in 'members.json' inside 'raw/members.json'
     def add_members(self):
         self.collect_members()
         members = []
@@ -61,24 +61,31 @@ class Crawler:
             f.write(json.dumps(members))
             f.close()
 
-    def collect_repos(self):
-        repo_url = "https://api.github.com/orgs/%s/repos" % (self.org)
-        try:
-            repo_detail = requests.get(repo_url)
-        except Exception, e:
-            raise e
+    # collects general information about organization
+    def collect_info(self):
+        info_url = "https://api.github.com/users/%s" % (self.org)
+        res = requests.get(info_url)
 
-        if (repo_detail.status_code == requests.codes.ok):
-            self.repos = repo_detail.text
+        info = {}
+
+        if (res.status_code == requests.codes.ok):
+            info['name'] = res.json()['name']
+            info['avatar_url'] = res.json()['avatar_url']
+            info['public_repos'] = res.json()['public_repos']
+            info['blog'] = res.json()['blog']
+
+            return info
         else:
+            print res.json()['message']
             sys.exit(0)
 
-    def add_repo_detail_in_file(self):
-        self.collect_repos()
+    # saves organizatioin information inside 'raw/info.json'
+    def add_info(self):
+        info = self.collect_info()
 
-        path = os.path.join(os.path.dirname(__file__), '../raw/repo.json')
-        repos_file = os.path.abspath(path)
+        path = os.path.join(os.path.dirname(__file__), '../raw/info.json')
+        info_file = os.path.abspath(path)
 
-        with open(repos_file, 'w') as f:
-            f.write(self.repos.encode('utf-8'))
+        with open(info_file, 'w') as f:
+            f.write(json.dumps(info))
             f.close()
