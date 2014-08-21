@@ -13,16 +13,15 @@ function addFields(){
 	long_to = temp_date+" "+months[temp_month - 1]+" "+temp_year;
 
 	$.post(url, data, function(res){
-		var color_to_assign = new Array(367), sizeof_res = Object.keys(res).length;
-		for(var _t=0;_t<367;_t++) color_to_assign[_t] = 0;
+		var color_to_assign = new Array(366), sizeof_res = Object.keys(res).length;
+		for(var _t=0;_t<366;_t++) color_to_assign[_t] = 0;
 		for(var temp=0; temp<sizeof_res; temp++){
 			var date_from_now = parseInt((today - Date.parse(res[temp].repository_pushed_at))/86400000);
-			if(date_from_now < 367){
+			if(date_from_now < 366){
 				color_to_assign[date_from_now]++;
 				total_commit++;
 			}
 		}
-		console.log("Total commits are : "+total_commit);
 		var j=0;
 
 		/*Months on top*/
@@ -161,29 +160,62 @@ function addFields(){
 		/*Contribution details.*/
 		var contrib_day = document.createElement("div");
 		contrib_day.setAttribute("class", "lbl1");
-		contrib_day.innerHTML = total_commit;
+		contrib_day.innerHTML = total_commit+ " total";
 		$(".contrib-day").append(contrib_day);
 		var longest_streak_div = document.createElement("div");
 		var date_range = document.createElement("div");
 		date_range.innerHTML = long_from+" - "+long_to;
 		date_range.setAttribute("class", "lbl1");
 		longest_streak_div.setAttribute("class", "lbl1");
-		longest_streak_div.innerHTML = longest_streak;
+		longest_streak_div.innerHTML = longest_streak+" days";
 		$(".longest-streak").append(longest_streak_div);
 		$(".longest-streak").append(date_range);
 		var current_streak_div = document.createElement("div");
 		current_streak_div.setAttribute("class", "lbl1");
-		current_streak_div.innerHTML = current_streak;
+		current_streak_div.innerHTML = current_streak+" days";
 		$(".current-streak").append(current_streak_div);
+		// load_graph(color_to_assign);
+		console.log(window.innerHeight);
+		console.log(window.innerWidth);
+		load_org_detail();
 	});
 }
 
-/*
-function hover(){
-	console.log(this.style);
-}
-*/
+function load_org_detail(){
+	var org = document.title, url = "/api/org";
 
-function lol(){
-	return "HI";
+	$.ajax({url: url}).done(function(res) {
+		res = JSON.parse(res);
+		var img = document.createElement("img");
+		img.setAttribute("src", res.avatar_url);
+		$(".org-detail").append(img);
+		var h1 = document.createElement("hi");
+		h1.setAttribute("class", "org-name");
+		$(".org-detail").append(h1);
+		var h1_div = document.createElement("longest_streak_div");
+		h1_div.innerHTML = res.login;
+		$(".org-name").append(h1_div);
+		// var h1_span_span = document.createElement("span");
+		// h1_span_span.innerHTML = org;
+		// $(".org-name").append(h1_span_span);
+		var line = document.createElement("div");
+		line.setAttribute("class", "line");
+		$(".org-detail").append(line);
+		/*
+		var location = document.createElement("div"), email = document.createElement("div"), created_at = document.createElement("div");
+		location.setAttribute("class", "loc-em-cr");
+		location.innerHTML = res.location;
+		email.innerHTML = res.email;
+		email.setAttribute("class", "loc-em-cr");
+		var created_at_ = new Date(res.created_at).toString().split(" ");
+		created_at.innerHTML = "created on "+created_at_[1]+" "+created_at_[2]+", "+created_at_[3];
+		created_at.setAttribute("class", "loc-em-cr");
+		$(".org-detail").append(location);
+		$(".org-detail").append(email);
+		$(".org-detail").append(created_at);
+		var line = document.createElement("div");
+		line.setAttribute("class", "line");
+		$(".org-detail").append(line);
+		*/
+	});
 }

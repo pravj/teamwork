@@ -1,9 +1,18 @@
+.main-class{
+	height: 640px;
+}
+
 #square {
 	margin-top: 2px;
 	width: 13px;
 	height: 13px;
 }
-	
+
+.calender-body{
+	margin-left: 400px;
+	transform: translate(-5.5px, -638px);
+}
+
 #square:hover{
 	border-style: solid;
     border-color: black;
@@ -94,4 +103,74 @@ html {
 
 .contrib{
 	margin-top: 10px;
+	height: 110px;
+}
+
+.repo-detail{
+	height: 350px;
+}
+
+.d3-graph0{
+	margin-bottom: 10px;
+    height: 350px;
+    text-align: center;
+  	width: 409px;
+  	margin-left: auto;
+  	margin-right: 32px;
+  	border-style: solid;
+    border-color: #eee;
+    border-width: 1px;
+}
+
+.d3-graph1{
+	margin-bottom: 10px;
+    height: 350px;
+    text-align: center;
+  	width: 409px;
+  	margin-left: auto;
+  	margin-right: auto;
+  	border-style: solid;
+    border-color: #eee;
+    border-width: 1px;
+    transform: translate(-17px,-362px);
+}
+
+.org-detail{
+	margin-top: 10px;
+    height: 637px;
+    text-align: center;
+  	width: 400px;
+  	margin-right: auto;
+  	/*border-style: solid;*/
+    border-color: #eee;
+    border-width: 1px;
+    transform: translate(0px, -359.5px);
+}
+
+img{
+	height:250px;
+	width: 250px;
+	border-radius: 6px;
+}
+
+.org-name{
+	display: block;
+	font-size: 26px;
+	margin-left: auto;
+}
+
+.line{
+	border-style: solid;
+    border-color: #eee;
+    border-width: 1px;
+    width: 250px;
+    margin-top: 20px;
+    transform: translate(75px, 0px);
+}
+
+.loc-em-cr{
+	margin-top: 20px;
+	height: 10px;
+	text-align: left;
+	transform: translate(75px, 0px);
 }
