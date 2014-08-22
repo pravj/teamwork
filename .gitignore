@@ -7,3 +7,6 @@ config/bigquery.json
 venv/
 
 config/teamwork.json
+
+raw/members.json
+raw/info.json

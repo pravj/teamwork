@@ -66,7 +66,7 @@ def streak_range(current, longest, time_data, index):
     if (current > 0):
         current_range = "%s - %s" % (time_data[366-current], time_data[365])
     if (longest > 0):
-        longest_range = "%s - %s" % (time_data[index-longest], time_data[index+1])
+        longest_range = "%s - %s" % (time_data[index-longest], time_data[index])
 
     return (current_range, longest_range, total_range)
 
@@ -74,7 +74,7 @@ def streak_range(current, longest, time_data, index):
 def collect_data(total, contributions, streak, refrence):
     result = {}
 
-    result['refrence'] = refrence
+    result['reference'] = refrence
     result['total'] = total
     result['contributions'] = contributions
     result['current_streak'] = streak[0]
