@@ -58,14 +58,26 @@ class Driver:
 
         self.raw_ref.filter({'is_member': 'false'}).delete().run()
 
-    def table_data(self, table, limit):
-        if (limit == 0):
-            __data = r.db(self.db).table(table).run()
+    def table_data(self, table, limit, reference, orderBy=0):
+        if (orderBy != 0):
+            if(limit != 0):
+                __data = r.db(self.db).table(table).with_fields('total','reference').order_by(r.desc(orderBy)).limit(limit).run()
+
+                print __data
+                data = []
+                for _data in __data:
+                    data.append(_data)
+
+                return json.dumps(data)
+
         else:
-            __data = r.db(self.db).table(table).limit(limit).run()
+            if (limit == 0):
+                __data = r.db(self.db).table(table).filter({'reference':reference}).run()
+            else:
+                __data = r.db(self.db).table(table).filter({'reference':reference}).limit(limit).run()
 
-        data = []
-        for _data in __data:
-            data.append(_data)
+            data = []
+            for _data in __data:
+                data.append(_data)
 
-        return json.dumps(data)
+            return json.dumps(data)
