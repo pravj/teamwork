@@ -1,7 +1,7 @@
 import os
 import ast
 import rethinkdb as r
-
+import json
 
 class Driver:
 
@@ -57,3 +57,15 @@ class Driver:
             self.raw_ref.filter({'user': member}).update({'is_member': 'true'}).run()
 
         self.raw_ref.filter({'is_member': 'false'}).delete().run()
+
+    def table_data(self, table, limit):
+        if (limit == 0):
+            __data = r.db(self.db).table(table).run()
+        else:
+            __data = r.db(self.db).table(table).limit(limit).run()
+
+        data = []
+        for _data in __data:
+            data.append(_data)
+
+        return json.dumps(data)

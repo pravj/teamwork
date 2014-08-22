@@ -1,12 +1,14 @@
-# -*- encoding:utf-8 -*-
 import os
 import ast
 import rethinkdb as r
 import jsontree, json
+from config import configer
 
 CONFIG_PATH = os.path.join(
 	os.path.dirname(__file__), '../../config/teamwork.json')
 CONFIG_FILE = os.path.abspath(CONFIG_PATH)
+
+config = configer.config('teamwork')
 
 class Procer:
 
@@ -26,7 +28,7 @@ class Procer:
 
 		self.host = config['host']
 		self.port = config['port']
-		self.db = config['db']
+		self.db = 'teamwork_%s' % (config['db'])
 		self.auth_key = config['auth_key']
 		self.org = config['organization']
 
@@ -41,7 +43,7 @@ class Procer:
 		print "Connected !! to %s" % self.db
 
 	def get_calender_data(self):
-		data = r.db(self.org).table("raw").pluck("repository_pushed_at","user").run()
+		data = r.db(self.db).table("raw").pluck("repository_pushed_at","user").run()
 		l = jsontree.jsontree()
 		i=0
 		for d in data:
@@ -50,7 +52,8 @@ class Procer:
 		return l
 
 	def get_gravatar(self):
-		data = r.db(self.org).table("repos").pluck("owner").limit(1).run()
+		# data = r.db(self.db).table("repos").pluck("owner").limit(1).run()
+		data = []
 		l = jsontree.jsontree()
 		for d in data:
 			l["avatar_url"] = d["owner"]["avatar_url"]

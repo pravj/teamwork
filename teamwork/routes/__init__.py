@@ -1,12 +1,16 @@
 from teamwork import app
 from flask import Flask, jsonify, request, render_template
 from teamwork.engine.procer import Procer
-# from teamwork.engine.api import Api
+from db.driver import Driver
+from config import configer
 
 procer = Procer()
 procer.connect()
 org = procer.org
-avatar_url = procer.get_gravatar()
+config = configer.config('teamwork')
+d = Driver(config)
+d.connect()
+
 
 @app.route('/')
 def cal():
@@ -14,25 +18,8 @@ def cal():
 		return render_template("sam.html")
 	return render_template("calender.html", org=org)
 
+#creating new endpoints
 
-@app.route('/api/org')
-def org_detail():
-	print avatar_url
-	return avatar_url
-	# return Api().detail_org(org)
-
-"""
-@app.route('/calender', methods=['GET','POST'])
-def calenderData():
-	org = request.form['org']
-	if(org is None or org == ''):
-		return render_template("sam.html")
-	return render_template("calender.html", org=org)
-"""
-
-@app.route('/calender/details', methods=['POST'])
-def return_details():
-	org = request.form['org']
-	if(org is None or org == ''):
-		return render_template("sam.html")
-	return jsonify(procer.get_calender_data())
+@app.route('/calender')
+def calender():
+	return d.table_data("contributions", 0)
