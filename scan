@@ -6,7 +6,7 @@ from datetime import date, timedelta
 
 from config import configer
 from db.driver import Driver
-from scanner import contributions
+from scanner import contributions, leaderboard
 
 MEMBERS_PATH = os.path.join(os.path.dirname(__file__), './raw/members.json')
 MEMBERS_FILE = os.path.abspath(MEMBERS_PATH)
@@ -20,6 +20,11 @@ def main():
 
     field = 'repository_pushed_at'
     time_series = driver.raw_ref.with_fields(field).order_by(field).run()
+
+    #field = 'repository_name'
+    #time_series = driver.raw_ref.with_fields(field).order_by(field).run()
+
+    #dictt = leaderboard.repo_frequency(time_series)
 
     start = date.today() - timedelta(days=365)
     org_data = contributions.contributions(time_series, start, 'organization')
