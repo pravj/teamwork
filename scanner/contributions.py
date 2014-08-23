@@ -18,12 +18,12 @@ def commits_data(start):
     return (time_data, commit_data)
 
 
-def contributions(time_series, start, reference = 'organization'):
+def contributions(time_series, start, reference='organization'):
     (time_data, commit_data) = commits_data(start)
 
     for i in range(len(time_series)):
         time_str = time_series[i]['repository_pushed_at'].split(" ")[0]
-        
+ 
         index = time_data.index(time_str)
         commit_data[index] += 1
 
@@ -43,7 +43,7 @@ def streak(commit_data, time_data):
         if (commit_data[k] != 0):
             current += 1
             temp_longest += 1
-            
+
         elif (commit_data[k] == 0 or k == 365):
             current = 0
 
@@ -56,7 +56,6 @@ def streak(commit_data, time_data):
     ranges = streak_range(current, longest, time_data, index)
 
     return (current, longest, ranges)
-    #return (current, longest, time_data[index+1], time_data[index-longest])
 
 
 def streak_range(current, longest, time_data, index):

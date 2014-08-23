@@ -3,6 +3,7 @@ import ast
 import rethinkdb as r
 import json
 
+
 class Driver:
 
     def __init__(self, config):
@@ -59,25 +60,20 @@ class Driver:
         self.raw_ref.filter({'is_member': 'false'}).delete().run()
 
     def table_data(self, table, limit, reference, orderBy=0):
+        result = []
+        con = self.ref.table(table)
+
         if (orderBy != 0):
             if(limit != 0):
-                __data = r.db(self.db).table(table).with_fields('total','reference').order_by(r.desc(orderBy)).limit(limit).run()
-
-                print __data
-                data = []
-                for _data in __data:
-                    data.append(_data)
-
-                return json.dumps(data)
+                res = con.with_fields('total', 'reference').order_by(r.desc(orderBy)).limit(limit).run()
 
         else:
             if (limit == 0):
-                __data = r.db(self.db).table(table).filter({'reference':reference}).run()
+                res = con.filter({'reference': reference}).run()
             else:
-                __data = r.db(self.db).table(table).filter({'reference':reference}).limit(limit).run()
+                res = con.filter({'reference': reference}).limit(limit).run()
 
-            data = []
-            for _data in __data:
-                data.append(_data)
+        for data in res:
+            result.append(data)
 
-            return json.dumps(data)
+        return json.dumps(result)

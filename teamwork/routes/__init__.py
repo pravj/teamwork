@@ -7,15 +7,18 @@ config = configer.config('teamwork')
 d = Driver(config)
 d.connect()
 
+
 @app.route('/')
 def cal():
-	return render_template("calender.html", org=config['organization'])
+    return render_template("calender.html", org=config['organization'])
+
 
 @app.route('/calender')
 def calender():
-	return d.table_data("contributions", 0, "organization")
+    return d.table_data("contributions", 0, "organization")
+
 
 @app.route('/user/top')
 def top_users():
-	return d.table_data("contributions", 6, 0, "total")
-	# r.db('teamwork_github').table('contributions').orderBy(r.desc('total')).limit(21)
+    # r.db('teamwork_github').table('contributions').orderBy(r.desc('total')).limit(21)
+    return d.table_data("contributions", 6, 0, "total")
