@@ -62,13 +62,13 @@ class Driver:
 
         self.raw_ref.filter({'is_member': 'false'}).delete().run()
 
-    def table_data(self, table, limit, reference, orderBy=0):
+    def table_data(self, table, limit, reference, orderBy=0, with1=0, with2=0):
         result = []
         con = self.ref.table(table)
 
         if (orderBy != 0):
             if(limit != 0):
-                res = con.with_fields('total', 'reference').order_by(r.desc(orderBy)).limit(limit).run()
+                res = con.with_fields(with1, with2).order_by(r.desc(orderBy)).limit(limit).run()
 
         else:
             if (limit == 0):

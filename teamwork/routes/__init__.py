@@ -21,4 +21,8 @@ def calender():
 @app.route('/user/top')
 def top_users():
     # r.db('teamwork_github').table('contributions').orderBy(r.desc('total')).limit(21)
-    return d.table_data("contributions", 6, 0, "total")
+    return d.table_data("contributions", 6, 0, "total", "total", "reference")
+
+@app.route('/repo/top')
+def top_repos():
+	return d.table_data("repositories", 5, 0, "repo_commit", "repo_name" ,"repo_commit")
