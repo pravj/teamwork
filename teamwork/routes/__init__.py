@@ -2,6 +2,7 @@ from teamwork import app
 from flask import Flask, jsonify, request, render_template
 from db.driver import Driver
 from config import configer
+import json
 
 config = configer.config('teamwork')
 d = Driver(config)
@@ -10,19 +11,10 @@ d.connect()
 
 @app.route('/')
 def cal():
-    return render_template("calender.html", org=config['organization'])
-
+	_d = json.loads(d.table_data("repositories", 5, 0, "repo_commit", "repo_name" ,"repo_commit"))
+	__d = json.loads(d.table_data("contributions", 6, 0, "total", "total", "reference"))
+	return render_template("calender.html", org=config['organization'], repos=_d, users=__d)
 
 @app.route('/calender')
 def calender():
     return d.table_data("contributions", 0, "organization")
-
-
-@app.route('/user/top')
-def top_users():
-    # r.db('teamwork_github').table('contributions').orderBy(r.desc('total')).limit(21)
-    return d.table_data("contributions", 6, 0, "total", "total", "reference")
-
-@app.route('/repo/top')
-def top_repos():
-	return d.table_data("repositories", 5, 0, "repo_commit", "repo_name" ,"repo_commit")

@@ -20,6 +20,16 @@
 							Popular contributers
 						</div>
 					</div>
+					{% for n in range(4) %}
+						<div class="top-header line-top">
+							<div class="text-st">{{users[n+1].reference}}</div>
+							<div class="count-st">{{users[n+1].total}}</div>
+						</div>
+					{% endfor %}
+					<div class="top-header">
+						<div class="text-st">{{users[4].reference}}</div>
+						<div class="count-st">{{users[4].total}}</div>
+					</div>
 				</div>
 			</div>
 			<div class="d3-graph1">
@@ -28,7 +38,17 @@
 						<div class="header-com">
 							Popular repositories
 						</div>
-					</div>	
+					</div>
+					{% for n in range(4) %}
+					<div class="top-header line-top">
+						<div class="text-st">{{repos[n].repo_name}}</div>
+						<div class="count-st">{{repos[n].repo_commit}}</div>
+					</div>
+					{% endfor %}
+					<div class="top-header">
+						<div class="text-st">{{repos[4].repo_name}}</div>
+						<div class="count-st">{{repos[4].repo_commit}}</div>
+					</div>
 				</div>
 			</div>
 		</div>

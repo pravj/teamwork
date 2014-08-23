@@ -120,8 +120,6 @@ function addFields(){
 		subField.setAttribute("style", "background:"+get_color(res.contributions[(7*i)+j][1], max_commit));
 		document.getElementById("vert"+i).appendChild(subField);}}
 	});
-load_top_user();
-load_top_repo();
 }
 
 function get_color(commit, max_commit){
@@ -136,78 +134,4 @@ function get_color(commit, max_commit){
 		return colors[3];
 	else
 		return colors[4];
-}
-
-function load_top_user(){
-	var url = "/user/top";
-	$.ajax({url: url}).done(function(res){
-		res = JSON.parse(res);
-		for(var i=0; i<4; i++){
-			var temp = document.createElement("div");
-			temp.setAttribute("class", "top-header line-top");
-			temp.setAttribute("id", "user"+i);
-			$(".top-users-top").append(temp);
-
-			var temp_text = document.createElement("div");
-			temp_text.setAttribute("class", "text-st");
-			temp_text.innerHTML = res[i+1].reference;
-			$("#user"+i).append(temp_text);
-
-			var temp_count = document.createElement("div");
-			temp_count.setAttribute("class", "count-st");
-			temp_count.innerHTML = res[i+1].total;
-			$("#user"+i).append(temp_count);
-		}
-		var temp = document.createElement("div");
-		temp.setAttribute("class", "top-header");
-		temp.setAttribute("id", "user"+i);
-		$(".top-users-top").append(temp);
-
-		var temp_text = document.createElement("div");
-		temp_text.innerHTML = res[i+1].reference;
-		temp_text.setAttribute("class", "text-st");
-		$("#user"+i).append(temp_text);
-
-		var temp_count = document.createElement("div");
-		temp_count.setAttribute("class", "count-st");
-		temp_count.innerHTML = res[i+1].total;
-		$("#user"+i).append(temp_count);
-	});
-}
-
-function load_top_repo(){
-	var url = "/repo/top";
-	$.ajax({url: url}).done(function(res){
-		res = JSON.parse(res);
-		for(var i=0; i<4; i++){
-			var temp = document.createElement("div");
-			temp.setAttribute("class", "top-header line-top");
-			temp.setAttribute("id", "repo"+i);
-			$(".top-repos-top").append(temp);
-
-			var temp_text = document.createElement("div");
-			temp_text.setAttribute("class", "text-st");
-			temp_text.innerHTML = res[i].repo_name;
-			$("#repo"+i).append(temp_text);
-
-			var temp_count = document.createElement("div");
-			temp_count.setAttribute("class", "count-st");
-			temp_count.innerHTML = res[i].repo_commit;
-			$("#repo"+i).append(temp_count);
-		}
-		var temp = document.createElement("div");
-		temp.setAttribute("class", "top-header");
-		temp.setAttribute("id", "repo"+i);
-		$(".top-repos-top").append(temp);
-
-		var temp_text = document.createElement("div");
-		temp_text.setAttribute("class", "text-st");
-		temp_text.innerHTML = res[i].repo_name;
-		$("#repo"+i).append(temp_text);
-
-		var temp_count = document.createElement("div");
-		temp_count.setAttribute("class", "count-st");
-		temp_count.innerHTML = res[i].repo_commit;
-		$("#repo"+i).append(temp_count);
-	});
 }
