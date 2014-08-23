@@ -4,8 +4,7 @@ teamwork
 > Organization's Contribution DashBoard : GitHub Data Challenge 3
 
 ####How teamwork works
-![How](https://raw.githubusercontent.com/pravj/teamwork/gh-pages/docs/teamwork.png?token=3437250__eyJzY29wZSI6IlJhd0Jsb2I6cHJhdmovdGVhbXdvcmsvZ2gtcGFnZXMvZG9jcy90ZWFtd29yay5wbmciLCJleHBpcmVzIjoxNDA5NDIxNjE0fQ%3D%3D--2ba9e9536ff232524dcf4ebcec23b25e17f8afe5)
-
+![How](https://raw.githubusercontent.com/pravj/teamwork/process/docs/architecture.png?token=3437250__eyJzY29wZSI6IlJhd0Jsb2I6cHJhdmovdGVhbXdvcmsvcHJvY2Vzcy9kb2NzL2FyY2hpdGVjdHVyZS5wbmciLCJleHBpcmVzIjoxNDA5NDIxOTg3fQ%3D%3D--4fe013cd04e2e29208aa128b2759b39a3d8bf419)
 
 ####Dependencies
 * [Google BigQuery](https://developers.google.com/bigquery/)
