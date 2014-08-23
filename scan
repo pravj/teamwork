@@ -12,25 +12,18 @@ MEMBERS_PATH = os.path.join(os.path.dirname(__file__), './raw/members.json')
 MEMBERS_FILE = os.path.abspath(MEMBERS_PATH)
 
 
-def main():
-    config = configer.config('teamwork')
-
-    driver = Driver(config)
-    driver.connect()
-
-    field = 'repository_pushed_at'
-    time_series = driver.raw_ref.with_fields(field).order_by(field).run()
-
-    #field = 'repository_name'
-    #time_series = driver.raw_ref.with_fields(field).order_by(field).run()
-
-    #dictt = leaderboard.repo_frequency(time_series)
-
+def organization_contributions(driver, field = 'repository_pushed_at'):
     start = date.today() - timedelta(days=365)
+
+    time_Series = driver.raw_ref.with_fields(field).order_by(field).run()
     org_data = contributions.contributions(time_series, start, 'organization')
 
     driver.create_table('contributions')
     driver.insert('contributions', org_data)
+
+
+def member_contributions(driver, field = 'repository_pushed_at'):
+    start = date.today() - timedelta(days=365)
 
     with open(MEMBERS_FILE, 'r') as f:
         members = json.loads(f.read())
@@ -39,7 +32,28 @@ def main():
     for member in members:
         time_series = driver.raw_ref.filter({'user': member}).with_fields(field).order_by(field).run()
         member_data = contributions.contributions(time_series, start, member)
+
         driver.insert('contributions', member_data)
+
+
+def repo_leaderboard(driver, field = 'repository_name'):
+    time_series = driver.raw_ref.with_fields(field).order_by(field).run()
+
+    repo_data = leaderboard.repo_frequency(time_series)
+
+    driver.create_table('repositories')
+    driver.insert('repositories', repo_data)
+
+
+def main():
+    config = configer.config('teamwork')
+
+    driver = Driver(config)
+    driver.connect()
+
+    organization_contributions()
+    members_contributions()
+    repo_leaderboard()
 
     driver.disconnect()
 
