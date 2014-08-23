@@ -21,7 +21,7 @@ def organization_contributions(driver, field='repository_pushed_at'):
 
     start = date.today() - timedelta(days=365)
 
-    time_Series = driver.raw_ref.with_fields(field).order_by(field).run()
+    time_series = driver.raw_ref.with_fields(field).order_by(field).run()
     org_data = contributions.contributions(time_series, start, 'organization')
 
     driver.create_table('contributions')
@@ -70,11 +70,11 @@ def main():
     driver = Driver(config)
     driver.connect()
 
-    organization_contributions()
+    organization_contributions(driver)
 
-    members_contributions()
+    member_contributions(driver)
 
-    repo_leaderboard()
+    repo_leaderboard(driver)
 
     driver.disconnect()
 

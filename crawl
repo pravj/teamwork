@@ -28,15 +28,15 @@ def collect_github_data(config):
     crawler.add_info()
 
 
-def collect_bigquery_data(config, driver):
+def collect_bigquery_data(query_config, config, driver):
     """collect and save organization's past data from BigQuery
 
     :param config: Dict object containing bigquery config data
     :param driver: instance of Driver :class:
     """
 
-    query = Query(config)
-    builder = Builder(config['organization'].lower())
+    query = Query(query_config)
+    builder = Builder(config["organization"].lower())
 
     result = query.execute(builder.build())
 
@@ -68,7 +68,7 @@ def main():
 
     collect_github_data(config)
 
-    collect_bigquery_data(query_config, driver)
+    collect_bigquery_data(query_config, config, driver)
 
     filter_bigquery_data(driver)
 

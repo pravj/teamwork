@@ -190,3 +190,13 @@ img{
     border-right: 0px;
     border-left: 0px;
 }
+
+.text-st{
+	position: relative;
+	top: 15px;
+	left: 10px;
+	text-align: left;
+	font-size: 20px;
+	color: #B88787;
+	width: 205px;
+}

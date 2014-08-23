@@ -43,7 +43,10 @@ class Driver:
             return False
 
     def create_table(self, table):
-        r.db(self.db).table_create(table).run()
+        if (self.table_exist(table)):
+            pass
+        else:
+            r.db(self.db).table_create(table).run()
 
     def insert(self, table, data):
         if (self.table_exist(table)):

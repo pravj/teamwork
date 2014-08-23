@@ -139,14 +139,29 @@ function get_color(commit, max_commit){
 }
 
 function load_top_user(){
-	for(var i=0; i<4; i++){
+	var url = "/user/top";
+	$.ajax({url: url}).done(function(res){
+		res = JSON.parse(res);
+		console.log(res[1].reference);
+		for(var i=0; i<4; i++){
+			var temp = document.createElement("div");
+			temp.setAttribute("class", "top-header line-top");
+			temp.setAttribute("id", "user"+i);
+			$(".top-users-top").append(temp);
+			var temp_text = document.createElement("div");
+			temp_text.innerHTML = res[i+1].reference;
+			temp_text.setAttribute("class", "text-st");
+			$("#user"+i).append(temp_text);
+		}
 		var temp = document.createElement("div");
-		temp.setAttribute("class", "top-header line-top");
+		temp.setAttribute("class", "top-header");
+		temp.setAttribute("id", "user"+i);
 		$(".top-users-top").append(temp);
-	}
-	var temp = document.createElement("div");
-	temp.setAttribute("class", "top-header");
-	$(".top-users-top").append(temp);
+		var temp_text = document.createElement("div");
+		temp_text.innerHTML = res[i+1].reference;
+		temp_text.setAttribute("class", "text-st");
+		$("#user"+i).append(temp_text);
+	});
 }
 
 function load_top_repo(){
