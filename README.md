@@ -14,6 +14,18 @@ teamwork
 * contribution calendar for a member in an organization
 * leaderboard of repositories according to number of commits
 
+####How to setup
+
+* clone the repository `git clone git@github.com:pravj/teamwork.git`
+* use `pip` to install the denedencies `sudo pip install -r requirements.txt`
+* edit your organization config at `config/teamwork.json`
+* edit your bigquery config at `config/bigquery.json` [get help](#)
+* setup `rethinkdb` [get help](####Dependencies)
+* crawl the data for organization using `./crawl`
+* analyse the data for organization using `./scan`
+* start application using `python app.py`
+* it should start working on `http://127.0.0.1:5000`
+
 ####How teamwork works
 ![How](https://raw.githubusercontent.com/pravj/teamwork/process/docs/architecture.png?token=3437250__eyJzY29wZSI6IlJhd0Jsb2I6cHJhdmovdGVhbXdvcmsvcHJvY2Vzcy9kb2NzL2FyY2hpdGVjdHVyZS5wbmciLCJleHBpcmVzIjoxNDA5NDIxOTg3fQ%3D%3D--4fe013cd04e2e29208aa128b2759b39a3d8bf419)
 
