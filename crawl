@@ -16,19 +16,16 @@ INFO_PATH = os.path.join(os.path.dirname(__file__), './raw/info.json')
 INFO_FILE = os.path.abspath(INFO_PATH)
 
 
-def main():
-    config = configer.config('teamwork')
-    query_config = configer.config('bigquery')
-
+def collect_github_data(config):
     crawler = Crawler(config['organization'].lower())
+
     crawler.add_members()
     crawler.add_info()
 
-    query = Query(query_config)
-    builder = Builder(config['organization'].lower())
 
-    driver = Driver(config)
-    driver.connect()
+def collect_bigquery_data(config, driver):
+    query = Query(config)
+    builder = Builder(config['organization'].lower())
 
     result = query.execute(builder.build())
 
@@ -37,11 +34,26 @@ def main():
     else:
         driver.insert('raw', result)
 
+
+def filter_bigquery_data(driver):
     with open(MEMBERS_FILE, 'r') as f:
         members = json.loads(f.read())
         f.close()
 
     driver.filter_rows(members)
+
+
+def main():
+    config = configer.config('teamwork')
+    query_config = configer.config('bigquery')
+
+    driver = Driver(config)
+    driver.connect()
+
+    collect_github_data(config)
+    collect_bigquery_data(query_config, driver)
+    filter_bigquery_data(driver)
+
     driver.disconnect()
 
 
