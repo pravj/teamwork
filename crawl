@@ -17,6 +17,11 @@ INFO_FILE = os.path.abspath(INFO_PATH)
 
 
 def collect_github_data(config):
+    """collect and save data related to organization, using GitHub API
+
+    :param config: Dict object containing teamwork config data
+    """
+
     crawler = Crawler(config['organization'].lower())
 
     crawler.add_members()
@@ -24,6 +29,12 @@ def collect_github_data(config):
 
 
 def collect_bigquery_data(config, driver):
+    """collect and save organization's past data from BigQuery
+
+    :param config: Dict object containing bigquery config data
+    :param driver: instance of Driver :class:
+    """
+
     query = Query(config)
     builder = Builder(config['organization'].lower())
 
@@ -36,6 +47,11 @@ def collect_bigquery_data(config, driver):
 
 
 def filter_bigquery_data(driver):
+    """remove rows that contains activities from non-organization members
+
+    :param driver: instance of Driver :class:
+    """
+
     with open(MEMBERS_FILE, 'r') as f:
         members = json.loads(f.read())
         f.close()
@@ -51,7 +67,9 @@ def main():
     driver.connect()
 
     collect_github_data(config)
+
     collect_bigquery_data(query_config, driver)
+
     filter_bigquery_data(driver)
 
     driver.disconnect()

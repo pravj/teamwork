@@ -13,6 +13,12 @@ MEMBERS_FILE = os.path.abspath(MEMBERS_PATH)
 
 
 def organization_contributions(driver, field='repository_pushed_at'):
+    """save analysed data for an organization
+
+    :param driver: instance of :class: Driver
+    :param field: (optional) str: field name which contains 'authored time'
+    """
+
     start = date.today() - timedelta(days=365)
 
     time_Series = driver.raw_ref.with_fields(field).order_by(field).run()
@@ -23,6 +29,12 @@ def organization_contributions(driver, field='repository_pushed_at'):
 
 
 def member_contributions(driver, field='repository_pushed_at'):
+    """save analysed data for a member
+
+    :param driver: instance of :class: Driver
+    :param field: (optional) str: field name which contains 'authored time'
+    """
+
     start = date.today() - timedelta(days=365)
 
     with open(MEMBERS_FILE, 'r') as f:
@@ -38,6 +50,12 @@ def member_contributions(driver, field='repository_pushed_at'):
 
 
 def repo_leaderboard(driver, field='repository_name'):
+    """save repositories frequency in organization's commit data
+
+    :param driver: instance of :class: Driver
+    :param field: (optional) str: field name which contains repository name
+    """
+
     time_series = driver.raw_ref.with_fields(field).order_by(field).run()
 
     repo_data = leaderboard.repo_frequency(time_series)
@@ -53,7 +71,9 @@ def main():
     driver.connect()
 
     organization_contributions()
+
     members_contributions()
+
     repo_leaderboard()
 
     driver.disconnect()
