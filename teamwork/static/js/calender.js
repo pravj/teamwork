@@ -111,7 +111,7 @@ function addFields(){
 		field.setAttribute("style", "transform : translate("+15*(i)+"px, "+y_+"px); width: 13px; ");
 		$(".contrib").append(field);
 		for(var j=1; j<=7;j++){
-		if((7*i)+j > 366)
+		if((7*i)+j >= 366)
 		break;
 		var subField = document.createElement("div");
 		subField.setAttribute("id", "square");
@@ -120,6 +120,8 @@ function addFields(){
 		subField.setAttribute("style", "background:"+get_color(res.contributions[(7*i)+j][1], max_commit));
 		document.getElementById("vert"+i).appendChild(subField);}}
 	});
+load_top_user();
+load_top_repo();
 }
 
 function get_color(commit, max_commit){
@@ -134,4 +136,26 @@ function get_color(commit, max_commit){
 		return colors[3];
 	else
 		return colors[4];
+}
+
+function load_top_user(){
+	for(var i=0; i<4; i++){
+		var temp = document.createElement("div");
+		temp.setAttribute("class", "top-header line-top");
+		$(".top-users-top").append(temp);
+	}
+	var temp = document.createElement("div");
+	temp.setAttribute("class", "top-header");
+	$(".top-users-top").append(temp);
+}
+
+function load_top_repo(){
+	for(var i=0; i<4; i++){
+		var temp = document.createElement("div");
+		temp.setAttribute("class", "top-header line-top");
+		$(".top-repos-top").append(temp);
+	}
+	var temp = document.createElement("div");
+	temp.setAttribute("class", "top-header");
+	$(".top-repos-top").append(temp);
 }
