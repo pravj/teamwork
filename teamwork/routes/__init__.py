@@ -57,6 +57,15 @@ def members(member):
 		info=info, months=months, cur_mon=cur_mon, res=cal, max=max_commit)
 
 @app.route('/repos')
-def member():
-	repos = json.loads(d.table_data("repositories", 0, 0, "repo_commit", "repo_name" ,"repo_commit"))
-	return render_template('repos.html', org=config['organization'], info=info, repos=repos)
+def repos():
+    repos = json.loads(d.table_data('repositories', 0, 0, 'repo_commit', 'repo_name' ,'repo_commit'))
+    return render_template('repos.html', org=config['organization'], info=info, repos=repos)
+
+@app.route('/members')
+def members():
+    members = json.loads(d.table_data('contributions', 0, 0, 'total', 'total', 'reference'))
+    return render_template('members.html', org=config['organization'], info=info, members=members)
+
+@app.route('/calender')
+def calender():
+    return d.table_data("contributions", 0, "organization")
