@@ -81,3 +81,21 @@ a {
 .commit-count {
   float: right;
 }
+
+.organization-member {
+  width: 60%;
+  height: 60px;
+  font-size: 20px;
+  background: #F1F1F1;
+  margin: auto;
+  margin-top: 10px;
+  padding: 10px;
+}
+
+.org-member-info {
+  text-align: right;
+}
+
+.org-member-info-company {
+  margin-right: 10px;
+}
