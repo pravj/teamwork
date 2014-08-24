@@ -31,7 +31,8 @@ def collect_github_data(config):
 def collect_bigquery_data(query_config, config, driver):
     """collect and save organization's past data from BigQuery
 
-    :param config: Dict object containing bigquery config data
+    :param query_config: Dict object having bigquery config data
+    :param config: Dict object containing teamwork config data
     :param driver: instance of Driver :class:
     """
 

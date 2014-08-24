@@ -44,7 +44,14 @@ class Crawler:
 
     # saves members in 'members.json' inside 'raw/members.json'
     def add_members(self):
+        if (self.is_org()):
+          pass
+        else
+          print "%s is not a GitHub organization" % (self.org)
+          sys.exit(0)
+
         self.collect_members()
+
         members = []
         for member in self.members:
             members.append(member['login'])
@@ -69,6 +76,7 @@ class Crawler:
             info['avatar_url'] = res.json()['avatar_url']
             info['public_repos'] = res.json()['public_repos']
             info['blog'] = res.json()['blog']
+            info['bio'] = res.json()['bio']
 
             return info
         else:
