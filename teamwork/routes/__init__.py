@@ -45,7 +45,7 @@ def cal():
 		repos=_d, users=user, info=info, months=months, cur_mon=cur_mon, res=cal, max=max_commit)
 
 @app.route('/member/<member>')
-def members(member):
+def memberss(member):
 	cal = json.loads(d.table_data("contributions", 0, member))
 
 	max_commit = cal[0]['contributions'][0][1]
