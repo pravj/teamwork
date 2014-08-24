@@ -3,8 +3,8 @@
   <head>
     <title>{{ info.name }}</title>
 
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/pure-min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/octicons/octicons.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/lib/pure-min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/lib/octicons/octicons.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
   </head>
 
@@ -38,8 +38,6 @@
         <div class="pure-u-1-2 org-member-info">
           <span class="mega-octicon octicon-organization"></span>
           <span class="org-member-info-company">{{ info.name }}</span>
-          <!-- <span class="mega-octicon octicon-link"></span> -->
-          <!-- <span class="org-member-info-blog"><a href="http://www.atmos.org">http://www.atmos.org</a></span> -->
         </div>
       </div>
       {% extends "cal.html" %}
