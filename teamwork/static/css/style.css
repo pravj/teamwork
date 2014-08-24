@@ -99,3 +99,35 @@ a {
 .org-member-info-company {
   margin-right: 10px;
 }
+
+.org-repos {
+  width: 60%;
+  font-size: 25px;
+  background: #F5F5F5;
+  margin: auto;
+  margin-top: 10px;
+  padding: 10px;
+  display: table;
+  border: 1px solid #DDDDDD;
+}
+
+.org-repos-head {
+  height: 50px;
+  border-bottom: 1px solid #DDDDDD;
+  background: #F1F1F1;
+  padding: 10px;
+}
+
+.repo-board {
+  margin-left: 10px;
+}
+
+.repo-board-repo {
+  font-size: 20px;
+  padding: 5px;
+  border-bottom: 1px solid #DDDDDD;
+}
+
+.repo-board-repo-name a {
+  color: #4183C4;
+} 
