@@ -1,4 +1,4 @@
-import os
+import os, time
 from teamwork import app
 from flask import Flask, jsonify, request, render_template
 from db.driver import Driver
@@ -26,12 +26,23 @@ config = configer.config('teamwork')
 d = Driver(config)
 d.connect()
 
+months = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"]
+colors = ["#eee", "#d6e685", "#8cc665", "#44a340", "#1e6823"]
+cur_mon = int(time.strftime("%m"))#Current month
 
 @app.route('/')
 def cal():
 	_d = json.loads(d.table_data("repositories", 5, 0, "repo_commit", "repo_name" ,"repo_commit"))
-	__d = json.loads(d.table_data("contributions", 6, 0, "total", "total", "reference"))
-	return render_template("teamwork.html", org=config['organization'], repos=_d, users=__d, info=info)
+	user = json.loads(d.table_data("contributions", 6, 0, "total", "total", "reference"))
+	cal = json.loads(d.table_data("contributions", 0, "organization"))
+
+	max_commit = cal[0]['contributions'][0][1]
+	for i in range(0, len(cal[0]['contributions'])):
+		if (max_commit < cal[0]['contributions'][i][1]):
+			max_commit = cal[0]['contributions'][i][1]
+
+	return render_template("teamwork.html", org=config['organization'], color=colors,
+		repos=_d, users=user, info=info, months=months, cur_mon=cur_mon, res=cal, max=max_commit)
 
 @app.route('/calender')
 def calender():

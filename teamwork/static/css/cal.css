@@ -1,0 +1,41 @@
+.calendar{
+	position: relative;
+	top: 40px;
+	height: 200px;
+}
+
+.months{
+    height: 20px;	
+  	width: 820px;
+  	margin: auto;
+}
+
+.s-month{
+	height: 20px;
+	width: 30px;
+	font-size: 12px;
+	color :#aaa;
+}
+
+.contrib{
+	width: 820px;
+	height: 130px;
+  	margin: auto;
+}
+
+#square {
+	margin-top: 2px;
+	width: 13px;
+	height: 13px;
+}
+
+#square:hover{
+	border-style: solid;
+    border-color: black;
+    border-width: 1px;
+}
+
+.contrib-cal{
+	position: relative;
+	left: 10px;
+}
