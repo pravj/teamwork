@@ -41,9 +41,17 @@ def cal():
 		if (max_commit < cal[0]['contributions'][i][1]):
 			max_commit = cal[0]['contributions'][i][1]
 
-	return render_template("teamwork.html", org=config['organization'], color=colors,
+	return render_template("teamwork.html", color=colors,
 		repos=_d, users=user, info=info, months=months, cur_mon=cur_mon, res=cal, max=max_commit)
 
-@app.route('/calender')
-def calender():
-    return d.table_data("contributions", 0, "organization")
+@app.route('/member/<member>')
+def member(member):
+	cal = json.loads(d.table_data("contributions", 0, member))
+
+	max_commit = cal[0]['contributions'][0][1]
+	for i in range(0, len(cal[0]['contributions'])):
+		if (max_commit < cal[0]['contributions'][i][1]):
+			max_commit = cal[0]['contributions'][i][1]
+	
+	return render_template("member.html", color=colors,
+		info=info, months=months, cur_mon=cur_mon, res=cal, max=max_commit)
