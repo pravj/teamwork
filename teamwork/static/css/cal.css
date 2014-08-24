@@ -17,7 +17,7 @@
 	color :#aaa;
 }
 
-.contrib{
+.contrib, .streaks{
 	width: 820px;
 	height: 130px;
   	margin: auto;
@@ -38,4 +38,27 @@
 .contrib-cal{
 	position: relative;
 	left: 10px;
+}
+
+.box{
+	height: 130px;
+	width: 273px;
+	text-align: center;
+	color: #777;
+}
+.streaks{
+	margin-top: 10px;
+}
+
+.longest{
+	transform: translate(273px, -130px);
+}
+
+.current{
+	transform: translate(546px, -260px);
+}
+
+.line-gap{
+	margin-top: 5px;
+	font-size: 15px;
 }

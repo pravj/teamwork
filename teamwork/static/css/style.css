@@ -134,4 +134,5 @@ a {
 
 .main-class{
   height: 640px;
+  overflow-y: hidden;
 }

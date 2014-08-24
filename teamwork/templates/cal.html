@@ -67,6 +67,25 @@
 			{% endfor %}
 		</div>
 		</div>
+		<div class="streaks">
+			<div class="total box">
+			<span>Year of contributions</span>
+			<div class="line-gap">{{ res[0].total }}</div>
+			<div class="line-gap">{{ res[0].total_streak_range }}</div></div>
+			<div class="longest box">
+			<span>Longest Streak</span>
+			<div class="line-gap">{{ res[0].longest_streak }}</div>
+			<div class="line-gap">{{ res[0].total_streak_range }}</div></div>
+			<div class="current box">
+			<span>Current Streak</span>
+			<div class="line-gap">{{ res[0].current_streak }}</div>
+			{% if res[0].current_streak == 0 %}
+			<div class="line-gap">Rock hard Place</div>
+			{% else %}
+			<div class="line-gap">{{ res[0].total_streak_range }}</div>
+			{% endif %}
+			</div>
+		</div>
 	</div>
 </body>
 </html>
