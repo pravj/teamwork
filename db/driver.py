@@ -67,8 +67,10 @@ class Driver:
         con = self.ref.table(table)
 
         if (orderBy != 0):
-            if(limit != 0):
+            if (limit != 0):
                 res = con.with_fields(with1, with2).order_by(r.desc(orderBy)).limit(limit).run()
+            if (limit == 0):
+                res = con.with_fields(with1, with2).order_by(r.desc(orderBy)).run()
 
         else:
             if (limit == 0):

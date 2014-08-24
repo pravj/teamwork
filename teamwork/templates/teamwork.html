@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>{{info.name}}</title>
+    <title>{{ info.name }}</title>
 
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/pure-min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/octicons/octicons.css') }}">
@@ -15,18 +15,20 @@
       <div class="header pure-g">
         <div class="pure-u-2-3 org">
           <span class="octicon octicon-organization"></span>
-          <span class="org-name"><a href="https://github.com/github">{{info.name}}</a></span>
-          <span class="org-bio">{{ info.name }} the company</span>
-          <span class="org-blog">{{info.blog}}</span>
+          <span class="org-name"><a href="https://github.com/github">{{ info.name }}</a></span>
+          <span class="org-bio">Github the company</span>
+          <span class="org-blog">
+            <a href="{{ info.blog }}">{{ info.blog }}</a>
+          </span>
         </div>
 
         <div class="pure-u-1-3 info">
           <span class="octicon octicon-repo"></span>
           <span class="info-repo">Public Repo :</span>
-          <span class="info-repo-count">{{info.public_repos}}</span>
+          <span class="info-repo-count">{{ info.public_repos }}</span>
           <span class="octicon octicon-person"></span>
           <span class="info-member">Public Member :</span>
-          <span class="info-member-count">{{info.public_member}}</span>
+          <span class="info-member-count">{{ info.public_member }}</span>
         </div>
       </div>
 
@@ -40,11 +42,11 @@
           <div class="contributions-top-left-repo">
             <span class="octicon octicon-repo"></span>
             <span class="top-left-repo-name">
-              <a href="#">{{repos[n].repo_name}}</a>
+              <a href="https://github.com/github/{{ repos[n].repo_name }}">{{ repos[n].repo_name }}</a>
             </span>
             <span class="commit-count">
               <span class="octicon octicon-git-commit"></span>
-              <span class="top-left-commit-count">{{repos[n].repo_commit}}</span>
+              <span class="top-left-commit-count">{{ repos[n].repo_commit }}</span>
             </span>
           </div>
           {% endfor %}
@@ -60,11 +62,11 @@
           <div class="contributions-top-right-member">
             <span class="octicon octicon-person"></span>
             <span class="top-right-member">
-              <a href="#">{{users[n+1].reference}}</a>
+              <a href="/member/{{ users[n+1].reference }}">{{ users[n+1].reference }}</a>
             </span>
             <span class="commit-count">
               <span class="octicon octicon-git-commit"></span>
-              <span class="top-right-commit-count">{{users[n+1].total}}</span>
+              <span class="top-right-commit-count">{{ users[n+1].total }}</span>
             </span>
           </div>
           {% endfor %}
