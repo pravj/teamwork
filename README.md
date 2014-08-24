@@ -7,6 +7,10 @@ teamwork
 
 > Contributions activity Dashboard application for GitHub organizations
 
+#### Demo
+
+> for Demo, please wait for us to complete our monday classes :grin:
+
 ####current features
 
 * contribution calendar for entire organization (as GitHub provides per user)
@@ -40,6 +44,10 @@ teamwork
   * Database, powering the application
 * [Flask](http://flask.pocoo.org/)
   * you know, for *one drop at a time*
+* [Octicons](https://octicons.github.com/)
+  * Project for GitHub, with GitHub's icons.
+* [Hint.css](http://kushagragour.in/lab/hint/)
+  * An awesome tooltip library in CSS.
 * [GitHub Webhook API](https://developer.github.com/v3/repos/hooks/) (*proposed*)
   * synchronization of new activity's data
 * [Retask](https://github.com/kushaldas/retask) (*proposed*)
