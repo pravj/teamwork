@@ -8,6 +8,8 @@
 </head>
 <body>
 	<div class="calendar">
+	<div class="contribution-header"><span>Public contributions</span></div>
+	<div class="calendar-border">
 		<div class="months">
 			{% set n = cur_mon %}
 			{% for i in range(12) %}
@@ -65,6 +67,7 @@
 				{% endfor %}
 			{% endif %}
 			{% endfor %}
+		</div>
 		</div>
 		</div>
 		<div class="streaks">
