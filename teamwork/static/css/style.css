@@ -1,0 +1,83 @@
+body {
+  margin: 0px;
+}
+
+* { box-sizing: border-box; } 
+
+a {
+  text-decoration: none;
+  color: #000000;
+}
+
+.header {
+  background: #F5F5F5;
+  height: 40px;
+  border-bottom: 1px solid #DDDDDD;
+  padding: 10px 20px;
+}
+
+.org-name {
+  font-size: 20px;
+  margin-left: 10px;
+}
+
+.org-bio, .org-blog{
+  font-style: normal;
+  font-size: 15px;
+  margin-left: 10px;
+}
+
+.info {
+  text-align: right;
+}
+
+.info-repo-count {
+  margin-right: 15px;
+}
+
+.info-repo, .info-member {
+  color: #3E3E3E;
+}
+
+.contributions-top {
+  width: 60%;
+  margin: auto;
+  margin-top: 10px;
+}
+
+.contributions-top-left, .contributions-top-right {
+  border: 1px solid #DDDDDD;
+  border-radius: 10px;
+  display: table;
+}
+
+.contributions-top-head {
+  font-weight: bold;
+  height: 25%;
+  background: #F5F5F5;
+  padding: 10px;
+  border-bottom: 1px solid #DDDDDD;
+  border-radius: 10px 10px 0px 0px;
+}
+
+.contributions-top-left-repo, .contributions-top-right-member {
+  padding: 5px;
+  border-bottom: 1px solid #DDDDDD;
+}
+
+.top-left-repo-name, .top-right-member {
+  font-size: 20px;
+  margin-left: 10px;
+}
+
+.top-left-repo-name a, .top-right-member a {
+  color: #4183C4;
+}
+
+.contributions-top-right-member {
+  padding: 5px;
+}
+
+.commit-count {
+  float: right;
+}

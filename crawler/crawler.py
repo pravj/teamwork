@@ -1,11 +1,7 @@
 import os
 import sys
 import json
-
-try:
-    import requests
-except ImportError:
-    raise Exception('unable to load requests module')
+import requests
 
 
 class Crawler:
