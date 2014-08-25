@@ -41,8 +41,8 @@ teamwork
 
 * clone the repository `git clone git@github.com:pravj/teamwork.git`
 * use `pip` to install the denedencies `sudo pip install -r requirements.txt`
-* edit your organization config at `config/teamwork.json`
-* edit your bigquery config at `config/bigquery.json` [see help section](#bigquery-help)
+* copy `config/teamwork.sample.json` to `config/teamwork.json` and edit it.
+* copy `config/bigquery.sample.json` as `config/bigquery.json` and edit it [see help section](#bigquery-help)
 * setup `rethinkdb` [see help section](#rethinkdb-help)
 * crawl the data for organization using `./crawl`
 * analyse the data for organization using `./scan`
