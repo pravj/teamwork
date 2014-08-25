@@ -15,7 +15,7 @@ teamwork
 
 > for Demo, please wait for us to complete our monday classes :grin:
 
-* you can have a look on screenshots of teamwork
+* you can have a look on screenshots of teamwork for [GitHub](https://github.com/github) organization (from Aug. 24, 2013 to Aug. 24, 2014)
 
 * organization contributions
 ![org](https://raw.githubusercontent.com/pravj/teamwork/process/docs/org.png)
