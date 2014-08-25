@@ -7,9 +7,28 @@ teamwork
 
 > Contributions activity Dashboard application for GitHub organizations
 
+####inspiration
+
+> teamwork is inspired by Twitter's Open Source Dashboard : [Twitter &hearts; Open Source](http://twitter.github.io/)
+
 #### Demo
 
 > for Demo, please wait for us to complete our monday classes :grin:
+
+* you can have a look on screenshots of teamwork
+
+* organization contributions
+![org](https://raw.githubusercontent.com/pravj/teamwork/process/docs/org.png)
+
+* member contributions
+![member](https://raw.githubusercontent.com/pravj/teamwork/process/docs/member.png)
+
+* members leaderboard, according to number of contributions
+![members](https://raw.githubusercontent.com/pravj/teamwork/process/docs/members.png)
+
+* repository leaderboard, according to number of contributions
+![repos](https://raw.githubusercontent.com/pravj/teamwork/process/docs/repos.png)
+
 
 ####current features
 
@@ -23,19 +42,22 @@ teamwork
 * clone the repository `git clone git@github.com:pravj/teamwork.git`
 * use `pip` to install the denedencies `sudo pip install -r requirements.txt`
 * edit your organization config at `config/teamwork.json`
-* edit your bigquery config at `config/bigquery.json` [get help](#BigQuery-Help)
-* setup `rethinkdb` [get help](#RethinkDB-Help)
+* edit your bigquery config at `config/bigquery.json` [see help section](#bigquery-help)
+* setup `rethinkdb` [see help section](#rethinkdb-help)
 * crawl the data for organization using `./crawl`
 * analyse the data for organization using `./scan`
 * start application using `python app.py`
 * it should start working on `http://127.0.0.1:5000`
+* **setup cronjob** *(optional)*
+  * *till synchronization using GitHub webhook API is being developed, cronjob can be used for daily change*
+  * *if you are choosing to do this, setup ./crawl and ./scan on cron*
 
 ####How teamwork works
 ![How](https://raw.githubusercontent.com/pravj/teamwork/process/docs/architecture.png?token=3437250__eyJzY29wZSI6IlJhd0Jsb2I6cHJhdmovdGVhbXdvcmsvcHJvY2Vzcy9kb2NzL2FyY2hpdGVjdHVyZS5wbmciLCJleHBpcmVzIjoxNDA5NDIxOTg3fQ%3D%3D--4fe013cd04e2e29208aa128b2759b39a3d8bf419)
 
 ####Dependencies
 * [Google BigQuery](https://developers.google.com/bigquery/)
-  * for consumption of [GitHub Archive]() data
+  * for consumption of [GitHub Archive](http://www.githubarchive.org/) data
 * [BigQuery-Python](https://github.com/tylertreat/BigQuery-Python)
   * Python client for interacting with Google BigQuery
 * [Requests](https://github.com/kennethreitz/requests)
