@@ -23,8 +23,8 @@ teamwork
 * clone the repository `git clone git@github.com:pravj/teamwork.git`
 * use `pip` to install the denedencies `sudo pip install -r requirements.txt`
 * edit your organization config at `config/teamwork.json`
-* edit your bigquery config at `config/bigquery.json` [get help](#)
-* setup `rethinkdb` [get help](####Dependencies)
+* edit your bigquery config at `config/bigquery.json` [get help](#BigQuery-Help)
+* setup `rethinkdb` [get help](#RethinkDB-Help)
 * crawl the data for organization using `./crawl`
 * analyse the data for organization using `./scan`
 * start application using `python app.py`
@@ -53,3 +53,19 @@ teamwork
 * [Retask](https://github.com/kushaldas/retask) (*proposed*)
   * Task Queue management
 * *some bottles of Appy Fizz and a lot of coffee cups*
+
+####BigQuery-Help
+* create a new project on [Google Developer Console](https://console.developers.google.com/project)
+* BigQuery API will be ON by default for any new project.
+* Create a new Client ID for your project
+  * go in `API & Auth -> APIs` section of project
+  * select `Service Account` as `Application Type`
+* use generated JSON to edit your bigquery config.
+
+####RethinkDB-Help
+* you need to install RethinkDB to use `teamwork`
+  * get it from [here](http://rethinkdb.com/docs/install/)
+* start the server
+  * start RethinkDB server by running `$ rethinkdb`
+* to setup RethinkDB as a cluster on system startup
+  * [Create a cluster on system startup](http://rethinkdb.com/docs/cluster-on-startup/)
