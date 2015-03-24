@@ -35,9 +35,10 @@ def contributions(time_series, start, reference='organization'):
 
     for i in range(len(time_series)):
         time_str = time_series[i]['repository_pushed_at'].split(" ")[0]
- 
-        index = time_data.index(time_str)
-        commit_data[index] += 1
+
+        if time_str in time_data:
+            index = time_data.index(time_str)
+            commit_data[index] += 1
 
     contributions = []
     for i in range(366):
