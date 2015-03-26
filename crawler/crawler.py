@@ -46,7 +46,7 @@ class Crawler:
     def add_members(self):
         if (self.is_org()):
           pass
-        else
+        else:
           print "%s is not a GitHub organization" % (self.org)
           sys.exit(0)
 
